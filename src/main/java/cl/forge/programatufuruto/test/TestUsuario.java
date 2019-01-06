@@ -13,13 +13,11 @@ public class TestUsuario {
 
     private static EntityManager manager;
     @PersistenceContext(unitName = "Persistencia")
-    private static EntityManagerFactory sesion;
+    private static EntityManagerFactory sesion = Persistence.createEntityManagerFactory("Persistencia");;
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
-
         /* Creando el gestor de persistencia*/
-        sesion = Persistence.createEntityManagerFactory("Persistencia");
         manager = sesion.createEntityManager();
 
         Usuario usuario1 = new Usuario("R2D2","correo@gmail.com","Baltazar","magi1");
@@ -28,14 +26,16 @@ public class TestUsuario {
 
 
         manager.getTransaction().begin();
-
+/*
         manager.persist(usuario1);
         manager.persist(usuario2);
         manager.persist(usuario3);
-
+*/
         manager.getTransaction().commit();
 
         imprimirUsuarios();
+        buscarUsuarioPorID();
+        manager.close();
     }
 
 
@@ -45,7 +45,17 @@ public class TestUsuario {
         System.out.println("Total de usuarios: "+usuarios.size());
         for(Usuario u : usuarios){
             System.out.println(u.toString());
+
         }
+        manager.close();
+    }
+
+    public static Usuario buscarUsuarioPorID(){
+
+        Usuario usuario = manager.find(Usuario.class,"R2D2");
+        System.out.println(usuario.getNombre());
+        manager.close();
+        return usuario;
 
     }
 
