@@ -2,10 +2,7 @@ package cl.forge.programatufuruto.mapping;
 
 import org.apache.tomcat.jni.Time;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -14,14 +11,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="usuario")
 public class Usuario implements Serializable {
 
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column (name = "idUsuario")
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private String idUsuario;
 
     @Column (name="email")
@@ -35,6 +35,16 @@ public class Usuario implements Serializable {
 
     @Column (name ="HORA_CONEXION")
     private String horaConexion;
+
+    @OneToMany(mappedBy="idUsuario")
+    private List<Foto> fotos;
+
+    @OneToMany(mappedBy = "idUsuario")
+    private List<Comentario> comentarios;
+
+    @OneToMany(mappedBy = "idUsuario")
+    private List<Like> likes;
+
 
 
     public Usuario(){
@@ -114,6 +124,30 @@ public class Usuario implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public List<Foto> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<Foto> fotos) {
+        this.fotos = fotos;
+    }
+
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
     }
 
     @Override

@@ -1,24 +1,40 @@
 package cl.forge.programatufuruto.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import cl.forge.programatufuruto.mapping.Usuario;
+import javax.persistence.*;
 import java.util.List;
 
 public class UsuarioDAO {
 
-    @Autowired
-    private EntityManager em;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Persistencia");
 
     public List obtenerUsuarios()
     {
+        EntityManager manager = emf.createEntityManager();
         String hql = "FROM Usuario u";
-        Query q = em.createQuery(hql);
+        Query q = manager.createQuery(hql);
+
         return q.getResultList();
+    }
+
+    public void imprimirUsuarios(){
+
+        EntityManager manager = emf.createEntityManager();
+        List<Usuario> usuarios = (List<Usuario>)manager.createQuery("FROM Usuario").getResultList();
+        System.out.println("Total de usuarios: "+usuarios.size());
+        for(Usuario u : usuarios){
+            System.out.println(u.toString());
+        }
+        manager.close();
+    }
+
+    public Usuario buscarUsuarioPorID(String id){
+        EntityManager manager = emf.createEntityManager();
+        Usuario usuario = manager.find(Usuario.class,id);
+        System.out.println(usuario.getNombre());
+        manager.close();
+        return usuario;
+
     }
 
     //METODO GUARDAR USUARIO NECESITA MD5 EN LA PASSWORD

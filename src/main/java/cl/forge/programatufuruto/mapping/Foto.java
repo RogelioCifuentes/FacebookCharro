@@ -1,19 +1,32 @@
 package cl.forge.programatufuruto.mapping;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="foto")
 public class Foto {
 
     @Id
+    @Column(name="idFoto")
     private int idFoto;
+
+    @Column(name="ubicacion")
     private String ubicacion;
+
+    @Column(name="pie_de_foto")
     private String pieDeFoto;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idUsuario")
     private Usuario idUsuario;
+
+    @OneToMany(mappedBy = "idFoto")
+    private List<Like> likes;
+
+    @OneToMany(mappedBy = "idFoto")
+    private List<Comentario> comentarios;
+
 
     public Foto(){
 
@@ -57,6 +70,24 @@ public class Foto {
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
 
     @Override
     public String toString() {

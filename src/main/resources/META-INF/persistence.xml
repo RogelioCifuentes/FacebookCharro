@@ -9,10 +9,10 @@
 
       <!--Representamos las clases -->
 
-        <class></class>
-        <class></class>
-        <class></class>
-        <class></class>
+        <class>cl.forge.programatufuruto.mapping.Usuario</class>
+        <class>cl.forge.programatufuruto.mapping.Comentario</class>
+        <class>cl.forge.programatufuruto.mapping.Foto</class>
+        <class>cl.forge.programatufuruto.mapping.Like</class>
 
 
         <properties>

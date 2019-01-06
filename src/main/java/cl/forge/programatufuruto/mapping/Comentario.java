@@ -11,15 +11,20 @@ public class Comentario implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name="idComentario")
     private int idComentario;
+
+    @Column(name = "comentario")
     private String comentario;
+
+    @Column(name="fecha")
     private Date fecha;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idUsuario")
     private Usuario idUsuario;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idFoto")
     private Foto idFoto;
 

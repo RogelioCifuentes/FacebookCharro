@@ -6,15 +6,15 @@ import javax.persistence.*;
 @Table(name="like")
 public class Like {
 
-
     @Id
+    @Column(name="idLike")
     private int idLike;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idUsuario")
     private Usuario idUsuario;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idFoto")
     private Foto idFoto;
 
