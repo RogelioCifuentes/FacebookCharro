@@ -22,23 +22,30 @@ public class TestUsuario {
         sesion = Persistence.createEntityManagerFactory("Persistencia");
         manager = sesion.createEntityManager();
 
+        Usuario usuario1 = new Usuario("R2D2","correo@gmail.com","Baltazar","magi1");
+        Usuario usuario2 = new Usuario("R2D3","gmail@correo.co","Melchor","magi2");
+        Usuario usuario3 = new Usuario("R2D4","cl@correo.gmail","Gaspar","magi3");
 
-        List<Usuario> usuarios =(List<Usuario>)manager.createQuery("FROM Usuario").getResultList();
-        System.out.println("Hay un total de "+usuarios.size()+" usuarios");
 
+        manager.getTransaction().begin();
+
+        manager.persist(usuario1);
+        manager.persist(usuario2);
+        manager.persist(usuario3);
+
+        manager.getTransaction().commit();
+
+        imprimirUsuarios();
     }
-    static void creardatos(){
 
 
+    public static void imprimirUsuarios(){
 
-        sesion.getTransaction().begin();
-
-        Usuario usuario1 = new Usuario(1,"correo@gmail.com","Baltazar","magi1");
-
-        sesion.get
-    }
-
-    static List<Usuario> imprimirDatos(){
+        List<Usuario> usuarios = (List<Usuario>)manager.createQuery("FROM Usuario").getResultList();
+        System.out.println("Total de usuarios: "+usuarios.size());
+        for(Usuario u : usuarios){
+            System.out.println(u.toString());
+        }
 
     }
 

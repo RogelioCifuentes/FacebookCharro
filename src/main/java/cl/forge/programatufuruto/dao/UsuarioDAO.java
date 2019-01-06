@@ -23,17 +23,5 @@ public class UsuarioDAO {
 
     //METODO GUARDAR USUARIO NECESITA MD5 EN LA PASSWORD
 
-    public String encriptar(String cadena) throws NoSuchAlgorithmException {
 
-        //Encriptacion MD5
-
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] hashInBytes = md.digest(cadena.getBytes(StandardCharsets.UTF_8));
-
-        StringBuilder sb = new StringBuilder();
-        for (byte b : hashInBytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
-    }
 }
