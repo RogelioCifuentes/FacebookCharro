@@ -17,7 +17,7 @@ public class Foto {
     @Column(name="pie_de_foto")
     private String pieDeFoto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="idUsuario")
     private Usuario idUsuario;
 

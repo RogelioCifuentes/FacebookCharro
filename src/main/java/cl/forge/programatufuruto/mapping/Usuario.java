@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class Usuario implements Serializable {
     @Column (name ="HORA_CONEXION")
     private String horaConexion;
 
-    @OneToMany(mappedBy="idUsuario")
+    @OneToMany(mappedBy="idUsuario", cascade = CascadeType.ALL)
     private List<Foto> fotos;
 
     @OneToMany(mappedBy = "idUsuario")
@@ -58,6 +59,7 @@ public class Usuario implements Serializable {
            this.email = email;
            this.nombre = nombre;
            this.password = encriptar(password);
+
 
            /* SE LE SETEA LA HORA A LA CUAL INGRESA*/
            DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:MM:ss"); //No guarda el HH:MM:ss
@@ -132,7 +134,6 @@ public class Usuario implements Serializable {
     public void setFotos(List<Foto> fotos) {
         this.fotos = fotos;
     }
-
 
     public List<Comentario> getComentarios() {
         return comentarios;

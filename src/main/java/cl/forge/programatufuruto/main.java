@@ -28,8 +28,6 @@ public class main {
 
         return args -> {
 
-            Usuario usuario = manager.find(Usuario.class,"R2D2");
-            System.out.println(usuario);
         };
 
 

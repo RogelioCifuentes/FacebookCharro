@@ -36,8 +36,4 @@ public class UsuarioDAO {
         return usuario;
 
     }
-
-    //METODO GUARDAR USUARIO NECESITA MD5 EN LA PASSWORD
-
-
 }
